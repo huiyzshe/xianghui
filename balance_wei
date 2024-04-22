@@ -1,0 +1,23 @@
+from web3 import Web3
+
+# 以太坊网络的 RPC URL
+rpc_url = "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"  # 您可以使用其他 RPC 提供商
+
+# 创建 Web3 实例
+web3 = Web3(Web3.HTTPProvider(rpc_url))
+
+# 检查与网络的连接
+if not web3.isConnected():
+    raise Exception("无法连接到以太坊网络")
+
+# 查询余额的地址
+address = "0xYourEthereumAddressHere"  # 替换为您要查询的以太坊地址
+
+# 查询余额（以 Wei 为单位）
+balance_wei = web3.eth.get_balance(address)
+
+# 将 Wei 转换为 Ether
+balance_eth = web3.fromWei(balance_wei, "ether")
+
+print(f"Address: {address}")
+print(f"Balance: {balance_eth} ETH")
